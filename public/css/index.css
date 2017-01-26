@@ -1,0 +1,38 @@
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.bg-green-gradient {
+	font-size: medium;
+}
+
+.user-footer {
+	background-color: rgb(51, 51, 51)!important; 
+	border-radius: 0px 0px 4px 4px !important;
+}
+
+.modal-new{
+	background-color: rgba(60, 141, 188, .75);
+	padding: 9px;
+}
+
+.modal-edit{
+	background-color: rgba(0,140,90,.589);
+	padding: 9px;
+
+}
+
+.modal-delete{
+	background-color: #d33724;
+	padding: 9px;
+}
+
+.primary-text {
+	font-size: 22px;
+	color: #FFF;
+	margin: 0px;
+}
