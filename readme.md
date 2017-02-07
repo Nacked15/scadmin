@@ -25,3 +25,8 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+
+=========================================================================================================================
+
+The AdminControll App is created on Laravel 5.2. If you want to contribute in this project, request more info from
+the main developer, a get the database for test this application.
