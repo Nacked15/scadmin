@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 use Validator;
-use App\Teacher;
 use App\User;
 
 class TeacherController extends Controller
@@ -46,13 +45,51 @@ class TeacherController extends Controller
         }
     }
 
-    public function edit($teacher)
-    {
+    public function edit($teacher){ 
         $getTeacher = DB::table('users')
-        						->select('id','photo', 'name', 'surname','email','phone')
+        						->select('id','photo', 'name', 'surname','email','phone','password')
         						->where('id', '=', $teacher)
         						->get();
         $data = json_encode($getTeacher);
         return $data;
+    }
+
+    public function update(Request $request){
+    	$idTeacher = $request->teacher;
+
+        $data = $request;
+        $update = DB::table('users')->where([
+                                            ['id','=', $idTeacher]
+                                        ])
+                                  	->update([
+                                        'name'     => $data['editname'],
+                                        'surname'  => $data['editsurname'],
+                                        'category' => 3, 
+                                        'email'    => $data['editemail'],
+                                        'phone'    => $data['editphone']
+                                    ]);
+
+        $cont = count($update);
+        if ($cont === 1) {
+            return redirect('teachers');
+        } else { 
+            return redirect('teachers');
+        }
+    }
+
+    public function destroy(Request $request)
+    {
+        $teacher = $request->deleteteacher;
+        $delete = DB::table('users')->where([
+                                                ['id','=', $teacher]
+                                            ])
+                                    ->delete();
+
+        $cont = count($delete);
+        if ($cont === 1) {
+            return redirect('teachers');
+        } else { 
+            return redirect('teachers');
+        }
     }
 }

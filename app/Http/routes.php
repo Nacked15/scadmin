@@ -42,19 +42,30 @@ Route::get('frm_advance', 'HomeController@getFrmAdvance');
 
 Route::get('students', 'StudentController@index');
 
-Route::get('classes', 'ClasseController@index');
-
 Route::get('courses', 'CourseController@index');
 Route::post('newCourse', 'CourseController@create');
-Route::delete('course/{course}','CourseController@destroy');
 Route::get('course/{curso}','CourseController@edit');
 Route::post('course','CourseController@update');
+Route::delete('course/{course}','CourseController@destroy');
+
+Route::get('levels', 'CourseController@showLevels');
+Route::post('newLevel', 'CourseController@createLevel');
+Route::get('level/{level}', 'CourseController@getLevel');
+Route::post('level', 'CourseController@updateLevel');
+Route::post('deletelevel', 'CourseController@deleteLevel');
 
 Route::get('teachers', 'TeacherController@index');
 Route::post('newTeacher', 'TeacherController@create');
 Route::get('teacher/{teacher}', 'TeacherController@edit');
 Route::post('teacher', 'TeacherController@update');
 Route::post('delete_teacher', 'TeacherController@destroy');
+
+Route::get('classes', 'ClasseController@index');
+Route::post('newClass', 'ClasseController@create');
+Route::get('classe/{classe}', 'ClasseController@edit');
+Route::post('classe', 'ClasseController@update');
+Route::post('addTeacher', 'ClasseController@setTeacher');
+Route::get('deleteClasse', 'ClasseController@destroy');
 
 Route::post('newTask', 'TaskController@create');
 Route::get('task/{task}', 'TaskController@edit');

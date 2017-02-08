@@ -103,6 +103,12 @@
 	                    <div class="chart" style="height: 307px;">
 	                      	<div id="calendar"></div>
 	                    </div>
+                        <div class="chart" style="height: 307px;">
+                            <div id="revenue-chart"></div>
+                        </div>
+                        <div class="chart" style="height: 307px;">
+                            <div id="line-chart"></div>
+                        </div>
 	                </div>
               	</div>
             </section>
@@ -134,10 +140,10 @@
                         <label for="description">Prioridad:</label>
                         <select name="priority" class="form-control" id="priority" required>
                             <option></option>}
-                            <option value="0">Normal</option>
-                            <option value="1">Importante</option>
-                            <option value="2">Urgente</option>
-                            <option value="3">Informativo</option>
+                            <option value="0"> Normal</option>
+                            <option value="1"> Importante</option>
+                            <option value="2"> Urgente</option>
+                            <option value="3"> Informativo</option>
                         </select>
                     </div>
                 </div>

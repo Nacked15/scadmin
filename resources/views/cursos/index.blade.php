@@ -15,60 +15,64 @@
 
 <!-- Main content -->
 <section class="content">
-    <a href="#" class="btn btn-social-icon btn-dropbox" data-toggle="modal" data-target=".example-modal-new" title="nuevo curso">
-        <i class="fa fa-plus"></i>
-    </a>
+    <div class="row">
+        <div class="col-lg-8 col-md-10 col-sm-12 col-lg-offset-2 col-md-offset-1">
+            <a href="#" class="btn btn-social-icon btn-dropbox" data-toggle="modal" data-target=".example-modal-new" title="nuevo curso">
+                <i class="fa fa-plus"></i>
+            </a>
 
-@if (count($cursos) > 0)
-	<div class="box">
-        <div class="box-header text-center">
-          <h3 class="box-title">Cursos</h3>
-        </div><!-- /.box-header -->
-        <div class="box-body">
-            <div class="table-responsive">
-                <table id="example1" class="table table-bordered table-striped">
-                    <thead>
-                      <tr>
-                        <th class="text-center">#</th>
-                        <th class="text-center">Curso</th>
-                        <th class="text-center">Descripción</th>
-                        <td class="text-center">&nbsp;</td>
-                        <td class="text-center">&nbsp;</td>
-                      </tr>
-                    </thead>
-                    <tbody>
-                    @foreach ($cursos as $curso)
-                        <tr>
-                            <td class="" title="Id">{{ $curso->id }}</td>
-                            <td class="" title="Curso">{{ $curso->name }}</td>
-                            <td class="" title="Descripción">{{ $curso->description }}</td>
-                            <td class="text-center">
-                                <a title="Editar" class="btn btn-info btn-sm btn-raised btnUpdateCourse" data-toggle="modal" data-target=".example-modal-update" type="button" id="{{ $curso->id}}">
-                                        <i class="fa fa-btn fa-pencil"></i>
-                                </a>
-                            </td>
-                            <td class="text-center" title="Eliminar">
-                                <form action="{{ url('course/'.$curso->id) }}" method="POST">
-                                    {{ csrf_field() }}
-                                    {{ method_field('DELETE') }}
+            @if (count($cursos) > 0)
+                <div class="box">
+                    <div class="box-header text-center">
+                      <h3 class="box-title">Cursos</h3>
+                    </div><!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                  <tr>
+                                    <th class="text-center">#</th>
+                                    <th class="text-center">Curso</th>
+                                    <th class="text-center">Descripción</th>
+                                    <td class="text-center">&nbsp;</td>
+                                    <td class="text-center">&nbsp;</td>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                @foreach ($cursos as $curso)
+                                    <tr>
+                                        <td class="" title="Id">{{ $curso->id }}</td>
+                                        <td class="" title="Curso">{{ $curso->name }}</td>
+                                        <td class="" title="Descripción">{{ $curso->description }}</td>
+                                        <td class="text-center">
+                                            <a title="Editar" class="btn btn-info btn-sm btn-raised btnUpdateCourse" data-toggle="modal" data-target=".example-modal-update" type="button" id="{{ $curso->id}}">
+                                                    <i class="fa fa-btn fa-pencil"></i>
+                                            </a>
+                                        </td>
+                                        <td class="text-center" title="Eliminar">
+                                            <form action="{{ url('course/'.$curso->id) }}" method="POST">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}
 
-                                    <button class="btn btn-danger btn-sm btn-raised" type="submit" id="delete-task-{{ $curso->id}}">
-                                        <i class="fa fa-btn fa-trash"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
-                    @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div><!-- /.box-body -->
-    </div><!-- /.box -->
-@else
-<h4 class="text-center">
-    No existe ningún curso en la base de datos.
-</h4>
-@endif
+                                                <button class="btn btn-danger btn-sm btn-raised" type="submit" id="delete-task-{{ $curso->id}}">
+                                                    <i class="fa fa-btn fa-trash"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
+            @else
+            <h4 class="text-center">
+                No existe ningún curso en la base de datos.
+            </h4>
+            @endif
+        </div>
+    </div>
 </section><!-- /.content -->
 
 

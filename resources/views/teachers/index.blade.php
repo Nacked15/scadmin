@@ -48,10 +48,14 @@
                         <td class="text-center" dat-title="Apellido">{{ strtoupper($maestro->surname ) }}</td>
                         <td class="text-center" dat-title="Email">{{ $maestro->email }} </td>
                         <td class="text-center" dat-title="Teléfono">{{ $maestro->phone }} </td>
-                        <td class="text-center" dat-title="Opciones">options</td>
-                        <td class="text-center">
+                        <td class="text-center" dat-title="Opciones">
                             <a title="Editar" class="btn btn-info btn-sm btn-raised btnUpdateTeacher" data-toggle="modal" data-target=".example-modal-update" type="button" id="{{ $maestro->id }}">
                                     <i class="fa fa-btn fa-pencil"></i>
+                            </a>
+                        </td>
+                        <td class="text-center">
+                            <a title="Editar" class="btn btn-danger btn-sm btn-raised btnDeleteTeacher" type="button" id="{{ $maestro->id }}">
+                                    <i class="fa fa-btn fa-trash"></i>
                             </a>
                         </td>
                       </tr>
@@ -116,24 +120,20 @@
                     {{ csrf_field() }}
                     <div class="form-group">
                         <label for="editname">Nombre:</label>
-                        <input type="hidden" name="teacher" id="techer">
-                        <input type="text" class="form-control" id="editname" name="editname" placeholder="Nombre">
+                        <input type="hidden" name="teacher" id="teacher">
+                        <input type="text" class="form-control" id="editname" name="editname">
                     </div>
                     <div class="form-group">
                         <label for="editsurname">Apellido(s):</label>
-                        <input type="text" class="form-control" id="editsurname" name="editsurname" placeholder="Apellido">
+                        <input type="text" class="form-control" id="editsurname" name="editsurname">
                     </div>
                     <div class="form-group">
                         <label for="editemail">Email:</label>
-                        <input type="email" class="form-control" id="editemail" name="editemail" placeholder="correo@mail.com">
+                        <input type="email" class="form-control" id="editemail" name="editemail">
                     </div>
                     <div class="form-group">
                         <label for="editphone">Teléfono:</label>
-                        <input type="text" class="form-control" id="editphone" name="editphone" placeholder="983 000 11 22">
-                    </div>
-                    <div class="form-group">
-                        <label for="editpassword">Contraseña:</label>
-                        <input type="password" class="form-control" id="phone" name="password" placeholder="* * * * * * *">
+                        <input type="text" class="form-control" id="editphone" name="editphone">
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -145,19 +145,19 @@
     </div>
 </div>
 
-<div class="modal fade example-modal-delete" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+<div id="deleteTeacher" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
-            <form action="{{ url('delete_task')}}" method="POST">
+            <form action="{{ url('delete_teacher')}}" method="POST">
                 <div class="modal-header modal-delete">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times"></span></button>
-                    <h4 class="modal-title text-center primary-text">Eliminar tarea?</h4>
+                    <h4 class="modal-title text-center primary-text">Eliminar Maestro?</h4>
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
                     
                     <div class="form-group">
-                      <input type="hidden" class="form-control" id="deletetasknum" name="deletetasknum">
+                      <input type="hidden" class="form-control" id="deleteteacher" name="deleteteacher">
                     </div>
                 </div>
                 <div class="modal-footer">

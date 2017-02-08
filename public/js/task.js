@@ -14,6 +14,7 @@ var Task = {
 				url: 'task/'+idTask,
 				type: 'GET',
 				success: function(a){
+					console.log(a);
 					var res = JSON.parse(a);
 					$('#edittasknum').val(res.id);
 					$('#edittask').val(res.task);

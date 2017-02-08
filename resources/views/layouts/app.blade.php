@@ -275,7 +275,24 @@
                       </ul>
                     </li>
                     <li class="header">Naatik</li>
-                    <li><a href="{{ url('courses') }}"><i class="fa fa-circle-o text-red"></i> <span>Cursos</span></a></li>
+                    <li class="treeview">
+                        <a href="#">
+                            <i class="fa fa-circle-o text-red"></i> <span>Naatik</span>
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                            <li>
+                                <a href="{{ url('courses') }}">
+                                    <i class="fa fa-circle-o text-aqua"></i> <span>Cursos</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url('levels') }}">
+                                    <i class="fa fa-circle-o text-green"></i> <span>Niveles</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                     <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span>Warning</span></a></li>
                     <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span>Information</span></a></li>
                     <li class="header">ERROR PAGES</li>

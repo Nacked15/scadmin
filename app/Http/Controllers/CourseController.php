@@ -5,30 +5,21 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\CourseModel;
+use App\Level;
+use DB;
 
 class CourseController extends Controller
 {
     public function __construct() {
         $this->middleware('auth');
     }
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+ 
+    public function index() {
         $courses = CourseModel::all();
         return view('cursos.index', ['cursos' => $courses]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request)
-    {
+    public function create(Request $request) {
         $this->validate($request, [
             'course'      => 'required|max:255',
             'description'   => 'max:255'
@@ -48,50 +39,13 @@ class CourseController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($curso)
-    {
+    public function edit($curso) {
         $curso = CourseModel::find($curso);
         $data = json_encode($curso);
         return $data;
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request)
-    {
+    public function update(Request $request) {
         $idcurso = $request->numcurso;
         $curso = CourseModel::find($idcurso);
         $cont = count($curso);
@@ -106,20 +60,80 @@ class CourseController extends Controller
             }
         } else {
             return redirect('500');
-        }
-        
+        }   
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(CourseModel $course)
-    {
+    public function destroy(CourseModel $course) {
         $course->delete();
 
         return redirect('/courses');
+    }
+
+    /**
+     * END COURSES SECTION
+     */
+    
+    public function showLevels() {
+        $levels = Level::all();
+        return view('cursos.levels', ['levels' => $levels]);
+    }
+
+    public function createLevel(Request $request) {
+        $this->validate($request, [
+            'level'      => 'required|max:255',
+            'description'   => 'max:255'
+        ]);
+
+        $data = $request;
+
+        $level = new Level;
+        $level->level = $data['level'];
+        $level->description= $data['description'];
+
+
+        if ($level->save()) {
+            return redirect('levels');
+        } else {
+            return redirect('500');
+        } 
+    }
+
+    public function getLevel($level) {
+        $this_level = Level::find($level);
+        $data = json_encode($this_level);
+        return $data;
+    }
+
+    public function updateLevel(Request $request) {
+        $idlevel = $request->numlevel;
+        $level = Level::find($idlevel);
+        $cont = count($level);
+        if ($cont === 1) {
+            $level->level        = $request->editlevel;
+            $level->description  = $request->editdescription;
+
+            if($level->save()) {
+                return redirect('levels');
+            } else {
+                return redirect('500');
+            }
+        } else {
+            return redirect('500');
+        } 
+    }
+
+    public function deleteLevel(Request $request) {
+        $id = $request->idLevel;
+        $delete = DB::table('levels')->where([
+                                                ['id','=', $id]
+                                            ])
+                                    ->delete();
+
+        $cont = count($delete);
+        if ($cont === 1) {
+            return redirect('levels');
+        } else { 
+            return redirect('500');
+        }
     }
 }
