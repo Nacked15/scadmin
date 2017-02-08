@@ -34,8 +34,7 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">Curso</th>
                                     <th class="text-center">Descripción</th>
-                                    <td class="text-center">&nbsp;</td>
-                                    <td class="text-center">&nbsp;</td>
+                                    <th class="text-center">Opciones</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -45,19 +44,20 @@
                                         <td class="" title="Curso">{{ $curso->name }}</td>
                                         <td class="" title="Descripción">{{ $curso->description }}</td>
                                         <td class="text-center">
-                                            <a title="Editar" class="btn btn-info btn-sm btn-raised btnUpdateCourse" data-toggle="modal" data-target=".example-modal-update" type="button" id="{{ $curso->id}}">
+                                            <a title="Editar" 
+                                               class="btn btn-info btn-sm btn-raised btnUpdateCourse" 
+                                               data-toggle="modal" 
+                                               data-target=".example-modal-update" 
+                                               type="button" 
+                                               id="{{ $curso->id}}">
                                                     <i class="fa fa-btn fa-pencil"></i>
+                                            </a>&nbsp;&nbsp;&nbsp;
+                                            <a title="Eliminar" 
+                                               class="btn btn-danger btn-sm btn-raised deleteCourse"
+                                               data-curso="{{ $curso->name }}" 
+                                               type="button" id="{{ $curso->id }}">
+                                                <i class="fa fa-btn fa-trash"></i>
                                             </a>
-                                        </td>
-                                        <td class="text-center" title="Eliminar">
-                                            <form action="{{ url('course/'.$curso->id) }}" method="POST">
-                                                {{ csrf_field() }}
-                                                {{ method_field('DELETE') }}
-
-                                                <button class="btn btn-danger btn-sm btn-raised" type="submit" id="delete-task-{{ $curso->id}}">
-                                                    <i class="fa fa-btn fa-trash"></i>
-                                                </button>
-                                            </form>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -129,9 +129,36 @@
                     <button type="submit" class="btn btn-primary">Guardar</button>
                 </div>
             </form>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+    </div>
+</div>
+
+<div id="deleteCourse" class="modal fade in" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <form action="{{ url('deletecourse')}}" method="POST">
+                <div class="modal-header modal-delete">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times"></span></button>
+                    <h4 class="modal-title text-center primary-text">Eliminar Curso</h4>
+                </div>
+                <div class="modal-body">
+                    {{ csrf_field() }}
+                    <br>
+                    <p class="text-center">¿Esta seguro de querer eliminar <br>
+                        <strong id="curso"></strong> ?
+                    </p>
+                    <div class="form-group">
+                      <input type="hidden" class="form-control" id="idcourse" name="idcourse">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="btnDeleteTask">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 @section('scripts')
     <script src="js/clases.js"></script>

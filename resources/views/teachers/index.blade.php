@@ -35,8 +35,7 @@
                     <th class="text-center">Apellido</th>
                     <th class="text-center">Email</th>
                     <th class="text-center">Teléfono</th>
-                    <th class="text-center">&nbsp;</th>
-                    <th class="text-center">&nbsp;</th>
+                    <th class="text-center">Opciones</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -49,12 +48,19 @@
                         <td class="text-center" dat-title="Email">{{ $maestro->email }} </td>
                         <td class="text-center" dat-title="Teléfono">{{ $maestro->phone }} </td>
                         <td class="text-center" dat-title="Opciones">
-                            <a title="Editar" class="btn btn-info btn-sm btn-raised btnUpdateTeacher" data-toggle="modal" data-target=".example-modal-update" type="button" id="{{ $maestro->id }}">
+                            <a title="Editar" 
+                               class="btn btn-info btn-sm btn-raised btnUpdateTeacher" 
+                               data-toggle="modal" 
+                               data-target=".example-modal-update" 
+                               type="button" 
+                               id="{{ $maestro->id }}">
                                     <i class="fa fa-btn fa-pencil"></i>
-                            </a>
-                        </td>
-                        <td class="text-center">
-                            <a title="Editar" class="btn btn-danger btn-sm btn-raised btnDeleteTeacher" type="button" id="{{ $maestro->id }}">
+                            </a>&nbsp;&nbsp;&nbsp;
+                            <a title="Editar" 
+                               class="btn btn-danger btn-sm btn-raised btnDeleteTeacher" 
+                               type="button"
+                               data-teacher="{{ $maestro->name }} {{ $maestro->surname }}" 
+                               id="{{ $maestro->id }}">
                                     <i class="fa fa-btn fa-trash"></i>
                             </a>
                         </td>
@@ -155,7 +161,9 @@
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
-                    
+                    <p class="text-center">¿Esta seguro de querer eliminar <br>
+                        <strong id="maestro"></strong> ?
+                    </p>
                     <div class="form-group">
                       <input type="hidden" class="form-control" id="deleteteacher" name="deleteteacher">
                     </div>

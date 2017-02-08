@@ -63,10 +63,19 @@ class CourseController extends Controller
         }   
     }
 
-    public function destroy(CourseModel $course) {
-        $course->delete();
+    public function destroy(Request $request) {
+        $id = $request->idcourse;
+        $delete = DB::table('courses')->where([
+                                                ['id','=', $id]
+                                            ])
+                                    ->delete();
 
-        return redirect('/courses');
+        $cont = count($delete);
+        if ($cont === 1) {
+            return redirect('courses');
+        } else { 
+            return redirect('500');
+        }
     }
 
     /**

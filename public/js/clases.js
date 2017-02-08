@@ -2,10 +2,12 @@ var Clases = {
 	initialize: function() {
 		console.log('Clases Initialize');
 		this.getCoursesData();
+		this.deleteCourses();
 		this.getlevelInfo();
 		this.deleteLevel();
 		this.newClass();
 		this.addTeacher();
+		this.generalFunction();
 	},
 
 	getCoursesData: function () {
@@ -24,6 +26,18 @@ var Clases = {
 
 			    }
 			});
+		});
+	},
+
+	deleteCourses: function(){
+		$('.deleteCourse').click(function() {
+			var id = $(this).attr('id'),
+				curso = $(this).attr('data-curso');
+			
+			$('#deleteCourse').modal({show: 'true'});
+			$('#idcourse').val(id);
+			$('strong#curso').text(curso);
+			  
 		});
 	},
 
@@ -46,8 +60,6 @@ var Clases = {
 					$('#editLevel').modal({show: 'true'});
 			    }
 			}); //End Ajax
-
-			
 		});
 	},
 
@@ -71,14 +83,12 @@ var Clases = {
 		$('#dateInit').datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
-            startDate: 'today',
             todayHighlight: true,
             language: 'es'
         });
         $('#dateEnd').datepicker({
             format: "yyyy-mm-dd",
             autoclose: true,
-            startDate: 'today',
             todayHighlight: true,
             language: 'es'
         });
@@ -91,6 +101,10 @@ var Clases = {
 			$('#setTeacher').modal({show: 'true'});
 		});
 	},
+
+	generalFunction: function(){
+		$('.modal-content').draggable();
+	}
 };
 
 Clases.initialize();

@@ -27,9 +27,11 @@ var Teachers = {
 
 	deleteTeacher: function(){
 		$('.btnDeleteTeacher').click(function(){
-			var teacher = $(this).attr('id');
+			var id = $(this).attr('id');
+			var teacher = $(this).attr('data-teacher');
 			$('#deleteTeacher').modal({show: 'false'}); 
-			$('#deleteteacher').val(teacher);
+			$('#deleteteacher').val(id);
+			$('#maestro').text(teacher.toUpperCase());
 		});
 	}
 };

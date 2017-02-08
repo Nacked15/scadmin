@@ -34,7 +34,7 @@
                                     <th class="text-center">#</th>
                                     <th class="text-center">Nivel</th>
                                     <th class="text-center">Descripción</th>
-                                    <td class="text-center">Opciones</td>
+                                    <th class="text-center">Opciones</th>
                                   </tr>
                                 </thead>
                                 <tbody>
@@ -49,7 +49,7 @@
                                                type="button" 
                                                id="{{ $level->id }}">
                                                     <i class="fa fa-btn fa-pencil"></i>
-                                            </a>&nbsp;&nbsp;
+                                            </a>&nbsp;&nbsp;&nbsp;
                                             <a title="Eliminar" 
                                                data-level="{{ $level->level }}" 
                                                class="btn btn-danger btn-sm btn-raised btnDeleteLevel" 
@@ -143,7 +143,7 @@
                 <div class="modal-body">
                     {{ csrf_field() }}
                     <br>
-                    <p class="text-center">¿Esta seguro de querer eliminar <strong id="nivel"></strong> ?</p>
+                    <p class="text-center">¿Esta seguro de querer eliminar <br><strong id="nivel"></strong> ?</p>
                     <div class="form-group">
                       <input type="hidden" class="form-control" id="idLevel" name="idLevel">
                     </div>

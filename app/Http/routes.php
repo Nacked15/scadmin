@@ -5,7 +5,7 @@
 | Application Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
+| Here is where you can register all of the routes for the application.
 | It's a breeze. Simply tell Laravel the URIs it should respond to
 | and give it the controller to call when that URI is requested.
 |
@@ -46,7 +46,7 @@ Route::get('courses', 'CourseController@index');
 Route::post('newCourse', 'CourseController@create');
 Route::get('course/{curso}','CourseController@edit');
 Route::post('course','CourseController@update');
-Route::delete('course/{course}','CourseController@destroy');
+Route::post('deletecourse','CourseController@destroy');
 
 Route::get('levels', 'CourseController@showLevels');
 Route::post('newLevel', 'CourseController@createLevel');

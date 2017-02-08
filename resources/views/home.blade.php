@@ -43,25 +43,48 @@
 			                        <i class="fa fa-ellipsis-v"></i>
 			                        <i class="fa fa-ellipsis-v"></i>
 		                      	</span>
-		                      	<span class="text">{{ $task->task }}</span>
+                                <?php 
+                                    $time = strtotime(date('Y-m-d H:i:s'));
+                                    $hora = strtotime($task->created_at);
+                                    $dife = ($time-$hora);
+                                    $tiempo = '';
+                                    if ($dife < 60) { $tiempo = $dife.' seg';}
+                                    if ($dife >= 60 && $dife < 3600) {
+                                        $dife   = date('i', $dife);
+                                        $tiempo = $dife.' min'; 
+                                    }
+                                    if ($dife >= 3600 && $dife < 86400) {
+                                        $dife   = date('H', $dife);
+                                        $tiempo = $dife.' hrs';
+                                    }
+                                    if ($dife >= 86400 && $dife < 604800) { 
+                                        $dife   = date('d', $dife); 
+                                        $tiempo = $dife.' dias'; 
+                                    } else {
+                                        $tiempo = date('Y-m-d', $task->date_created);
+                                    }
+                                      
+                                ?>
+		                      	<span class="text">{{ $task->task }} </span>
+
 		                      	@if ($task->priority == 0)
 		                      		<small class="label label-default pull-right">
-				                    	<i class="fa fa-clock-o"></i> 2 mins
+				                    	<i class="fa fa-clock-o"></i> <?= $tiempo; ?>
 				                    </small>
 			                    @endif
 			                    @if ($task->priority == 1)
 		                      		<small class="label label-warning pull-right">
-				                    	<i class="fa fa-clock-o"></i> 2 mins
+				                    	<i class="fa fa-clock-o"></i> <?= $tiempo; ?>
 				                    </small>
 			                    @endif
 			                    @if ($task->priority == 2)
 		                      		<small class="label label-danger pull-right">
-				                    	<i class="fa fa-clock-o"></i> 2 mins
+				                    	<i class="fa fa-clock-o"></i> <?= $tiempo; ?>
 				                    </small>
 			                    @endif
 			                    @if ($task->priority == 3)
 		                      		<small class="label label-info pull-right">
-				                    	<i class="fa fa-clock-o"></i> 2 mins
+				                    	<i class="fa fa-clock-o"></i> <?= $tiempo; ?>
 				                    </small>
 			                    @endif
 		                      	

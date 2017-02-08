@@ -71,7 +71,7 @@
                                type="button" 
                                id="{{ $clase->id }}">
                                     <i class="fa fa-btn fa-pencil"></i>
-                            </a>&nbsp;&nbsp;
+                            </a>&nbsp;&nbsp;&nbsp;
                             <a title="Eliminar" 
                                class="btn btn-danger btn-sm btn-raised btnDeleteClass" 
                                type="button" 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Task;
+use DB;
 
 
 class HomeController extends Controller
