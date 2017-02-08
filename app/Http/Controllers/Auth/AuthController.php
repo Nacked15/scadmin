@@ -87,15 +87,15 @@ class AuthController extends Controller
         $data = $request;
 
         $user = new User;
-        $user->name = $data['name'];
-        $user->surname = $data['surname'];
+        $user->name = strtolower($data['name']);
+        $user->surname = strtolower($data['surname']);
         //$user->photo = $data['name'];
         $user->category = $data['category'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
 
         if ($user->save()) {
-            return 'Registro correcto';
+            return redirect('login');
         } else {
             return 'registration incorrect';
         }

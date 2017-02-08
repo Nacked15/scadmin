@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Schedul extends Model
 {
-    protected $table = 'schedules';
+    protected $table = 'schedulles';
     protected $fillable = [ 'id', 
     						'year', 
     						'date_init',
