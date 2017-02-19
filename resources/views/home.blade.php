@@ -61,7 +61,7 @@
                                         $dife   = date('d', $dife); 
                                         $tiempo = $dife.' dias'; 
                                     } else {
-                                        $tiempo = date('Y-m-d', $task->date_created);
+                                        $tiempo = $task->date_created;
                                     }
                                       
                                 ?>
@@ -126,12 +126,6 @@
 	                    <div class="chart" style="height: 307px;">
 	                      	<div id="calendar"></div>
 	                    </div>
-                        <div class="chart" style="height: 307px;">
-                            <div id="revenue-chart"></div>
-                        </div>
-                        <div class="chart" style="height: 307px;">
-                            <div id="line-chart"></div>
-                        </div>
 	                </div>
               	</div>
             </section>

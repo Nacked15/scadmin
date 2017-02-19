@@ -40,26 +40,28 @@ Route::get('modal', 'HomeController@getModal');
 Route::get('frm_general', 'HomeController@getFrmGeneral');
 Route::get('frm_advance', 'HomeController@getFrmAdvance');
 
-Route::get('students', 'StudentController@index');
-
+//Stack Courses
 Route::get('courses', 'CourseController@index');
 Route::post('newCourse', 'CourseController@create');
 Route::get('course/{curso}','CourseController@edit');
 Route::post('course','CourseController@update');
 Route::post('deletecourse','CourseController@destroy');
 
+//Stack Leves
 Route::get('levels', 'CourseController@showLevels');
 Route::post('newLevel', 'CourseController@createLevel');
 Route::get('level/{level}', 'CourseController@getLevel');
 Route::post('level', 'CourseController@updateLevel');
 Route::post('deletelevel', 'CourseController@deleteLevel');
 
+//Teachers Modul
 Route::get('teachers', 'TeacherController@index');
 Route::post('newTeacher', 'TeacherController@create');
 Route::get('teacher/{teacher}', 'TeacherController@edit');
 Route::post('teacher', 'TeacherController@update');
 Route::post('delete_teacher', 'TeacherController@destroy');
 
+//Classes Modul
 Route::get('classes', 'ClasseController@index');
 Route::post('newClass', 'ClasseController@create');
 Route::get('classe/{classe}', 'ClasseController@edit');
@@ -67,6 +69,13 @@ Route::post('classe', 'ClasseController@update');
 Route::post('addTeacher', 'ClasseController@setTeacher');
 Route::get('deleteClasse', 'ClasseController@destroy');
 
+//Students Modul
+Route::get('students', 'StudentController@index');
+Route::get('frmStudent', 'StudentController@create');
+Route::get('load_form/{frm}', 'StudentController@loadForm');
+Route::post('newTutor', 'StudentController@storeTutor');
+
+//Stack Tasks
 Route::post('newTask', 'TaskController@create');
 Route::get('task/{task}', 'TaskController@edit');
 Route::post('task', 'TaskController@update');

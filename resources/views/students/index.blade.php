@@ -16,6 +16,11 @@
 <!-- Main content -->
 <section class="content">
 
+   <div class="clearfix no-border">
+        <a href="{{ url('frmStudent') }}" class="btn btn-info" id="newStudent">
+            <i class="fa fa-plus"></i> Nueva Alumno
+        </a>
+      </div>
 	<div class="box">
         <div class="box-header text-center">
           <h3 class="box-title">Students English Club</h3>
@@ -79,5 +84,9 @@
     </div><!-- /.box -->
 
 </section><!-- /.content -->
+
+@section('scripts')
+    <script src="js/students.js"></script>
+@stop
 
 @endsection

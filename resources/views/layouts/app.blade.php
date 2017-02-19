@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>NAATIK | @yield('title')</title>
+    <link rel="shortcut icon" href="img/NewAvatar.png" type="image/x-icon">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -310,9 +311,13 @@
 
         <footer class="main-footer">
             <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.0
+                <small>Developed by: Ing. J. Luis Yama May</small>
+                <b>Version</b> 3.0
             </div>
-            <strong>Copyright &copy; 2014-2015 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights reserved.
+            <strong>
+                Copyright &copy; 2017 
+                <a href="http://www.naatickmexico.com">Naatik S.C.</a>.
+            </strong> All rights reserved.
         </footer>
 
         <!-- Control Sidebar -->
