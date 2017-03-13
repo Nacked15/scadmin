@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\User;
 use Validator;
+use Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -76,6 +77,10 @@ class AuthController extends Controller
     }
 
     public function postRegister(Request $request){
+        $avatar = $request->file('avatar');
+        $input = array('image' => $avatar);
+        $rules = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:6000');
+        $validate = Validator::make($input, $rules);
         $this->validate($request, [
             'name'      => 'required',
             'surname'   => 'required',
@@ -84,20 +89,31 @@ class AuthController extends Controller
             'password'  =>  'required|min:6'
         ]);
 
-        $data = $request;
+        if (!$validate->fails()) {
+            $data = $request;
+            $randon = rand(10, 8000);
+            //Processing the image file
+            $filename = $avatar->getClientOriginalName();
+            $mime     = $avatar->getClientOriginalExtension();
+            $newname  = $data['name']."-".$randon.".".$mime;
 
-        $user = new User;
-        $user->name = strtolower($data['name']);
-        $user->surname = strtolower($data['surname']);
-        //$user->photo = $data['name'];
-        $user->category = $data['category'];
-        $user->email = $data['email'];
-        $user->password = bcrypt($data['password']);
+            \Storage::disk('avatars')->put($newname, \File::get($avatar));
 
-        if ($user->save()) {
-            return redirect('login');
+            $user = new User;
+            $user->name     = strtolower($data['name']);
+            $user->surname  = strtolower($data['surname']);
+            $user->avatar   = $newname;
+            $user->category = $data['category'];
+            $user->email    = $data['email'];
+            $user->password = bcrypt($data['password']);
+
+            if ($user->save()) {
+                return redirect('login');
+            } else {
+                return redirect('500');
+            }
         } else {
-            return 'registration incorrect';
+            return redirect('500');
         }
 
     }

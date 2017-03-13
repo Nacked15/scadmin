@@ -18,32 +18,25 @@ class StudentController extends Controller{
         return view('students.newstudent');
     }
 
-    public function LoadForm($frm){
-        switch ($frm) {
-            case '1': return view('students.frmTutor'); break;
-            case '2': return view('students.frmStudent'); break;
-            
-            default: return view('students.frmTutor'); break;
-        }
-    }
+
 
     public function storeTutor(Request $request) {
-        $lastTutor = DB::table('tutor')->max('id');
+        $lastTutor = DB::table('tutors')->max('id');
         $newTutor  = $lastTutor + 1; 
         $this->validate($request, [
-            'name'     => 'required',
-            'surname'  => 'required',
-            'lastname'  => 'required',
+            'name'         => 'required',
+            'surname'      => 'required',
+            'lastname'     => 'required',
             'relationship' => 'required',
-            'job'  => 'required',
+            'job'          => 'required',
             'cellphone'    => 'required',
-            'phone'    => 'required',
-            'familiar'   => 'required',
+            'phone'        => 'required',
+            'familiar'     => 'required',
             'phoneAlt'     => 'required',
-            'street'      => 'required',
-            'number'     => 'required',
+            'street'       => 'required',
+            'number'       => 'required',
             'between'      => 'required',
-            'colony'    => 'required',
+            'colony'       => 'required',
         ]);
         $data = $request;
         $addTutor = DB::table('tutors')
@@ -80,8 +73,39 @@ class StudentController extends Controller{
             }
         } else {
             return redirect('500');
-        }
-         
+        }   
+    }
+
+    public function getAddress() {
+        $tutor = DB::table('tutors')->max('id');
+        $getAddress = DB::table('address')
+                                ->select('street','number', 'between', 'colony')
+                                ->where('user_id', '=', $tutor)
+                                ->get();
+        $data = json_encode($getAddress);
+        return $data;
+    }
+
+    public function storeStudent(Request $request) {
+        $Tutor = DB::table('tutors')->max('id');
+
+        $data = $request;
+
+        $this->validate($request, [
+            'name'         => 'required',
+            'surname'      => 'required',
+            'lastname'     => 'required',
+            'birthdate'    => 'required',
+            'genre'        => 'required',
+            'civilstatus'  => 'required',
+            'cellphone'    => 'required',
+            'street'       => 'required',
+            'number'       => 'required',
+            'between'      => 'required',
+            'colony'       => 'required',
+            'reference'    => 'required',
+            'anotations'   => 'required',
+        ]);
     }
 
     public function show($id){

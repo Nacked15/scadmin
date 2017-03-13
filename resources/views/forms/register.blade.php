@@ -10,8 +10,8 @@
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="dist/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    {{-- <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> --}}
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
     <!-- iCheck -->
@@ -58,10 +58,9 @@
                 <input type="password" class="form-control" name="password" id="password" placeholder="Password">
                 <span class="glyphicon glyphicon-lock form-control-feedback"></span>
               </div>
-              {{-- <div class="form-group has-feedback">
-                <input type="password" class="form-control" placeholder="Retype password">
-                <span class="glyphicon glyphicon-log-in form-control-feedback"></span>
-              </div> --}}
+              <div class="form-group has-feedback">
+                <input type="file" name="avatar" id="avatar">
+              </div> 
               <div class="row">
                 <div class="col-xs-6">
                   <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
