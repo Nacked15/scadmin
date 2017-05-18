@@ -9,6 +9,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
     <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/smoke.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="dist/css/font-awesome.min.css">
     <!-- Ionicons -->
@@ -418,6 +419,8 @@
     </script>
     <!-- Bootstrap 3.3.5 -->
     <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="js/smoke.min.js"></script>
+    <script src="lang/es.min.js"></script>
     <!-- Select2 -->
     <script src="plugins/select2/select2.full.min.js"></script>
     <!-- InputMask -->
