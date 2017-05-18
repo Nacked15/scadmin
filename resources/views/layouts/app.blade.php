@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>NAATIK | @yield('title')</title>
-    <link rel="shortcut icon" href="img/NewAvatar.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('avatars/icon.png') }}" type="image/x-icon">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.5 -->
@@ -139,13 +139,13 @@
                         <!-- User Account: style can be found in dropdown.less -->
                         <li class="dropdown user user-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                              <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="user-image" alt="User Image">
+                              <img src="{{ asset('avatars/'.Auth::user()->photo) }}" class="user-image" alt="User Image">
                               <span class="hidden-xs">{{ ucwords(Auth::user()->name)}} {{ ucwords(Auth::user()->surname)}}</span>
                             </a>
                             <ul class="dropdown-menu">
                                 <!-- User image -->
                                 <li class="user-header">
-                                    <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="img-circle" alt="User Image">
+                                    <img src="{{ asset('avatars/'.Auth::user()->photo) }}" class="img-circle" alt="User Image">
                                     <p>
                                         {{ ucwords(Auth::user()->name)}} {{ ucwords(Auth::user()->surname)}}
                                         <small>Member since Nov. 2016</small>
@@ -179,7 +179,7 @@
                 <div class="user-panel">
                     <div class="pull-left image">
 
-                        <img src="{{ asset('avatars/'.Auth::user()->avatar) }}" class="img-circle" alt="User Image">
+                        <img src="{{ asset('avatars/'.Auth::user()->photo) }}" class="img-circle" alt="User Image">
                     </div>
                     <div class="pull-left info">
                         <p>{{ ucwords(Auth::user()->name)}} {{ ucwords(Auth::user()->surname)}}</p>
