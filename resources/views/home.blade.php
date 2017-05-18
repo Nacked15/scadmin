@@ -15,7 +15,7 @@
 
     <section class="content">
         <div class="row">
-            <section class="col-lg-8 connectedSortable">
+            <section class="col-lg-7 connectedSortable">
               	<div class="box box-primary">
 	                <div class="box-header">
 	                  	<i class="glyphicon glyphicon-list-alt"></i>
@@ -99,7 +99,7 @@
               	</div>
             </section>
 
-            <section class="col-lg-4 connectedSortable">
+            <section class="col-lg-5 connectedSortable">
               	<div class="box box-solid bg-green-gradient">
 	                <div class="box-header">
 	                  	<i class="fa fa-calendar"></i>
@@ -249,6 +249,9 @@
             todayBtn: true,
             language: 'es'
         });
-        
+    
 	</script>
+    <!-- Morris.js charts -->
+    <script src="dist/js/raphael.min.js"></script>
+    <script src="plugins/morris/morris.js"></script>
 @stop

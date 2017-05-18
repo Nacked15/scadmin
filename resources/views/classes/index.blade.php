@@ -44,8 +44,8 @@
                     <tr>
                         <td class="text-center"> {{ $clase->id }}</td>
                         <td class="text-center"> {{ $clase->name }} {{ $clase->level}}</td>
-                        <td class="text-center"> {{ $clase->date_init }} </td>
-                        <td class="text-center"> {{ $clase->date_end }} </td>
+                        <td class="text-center"> {{ date('d-m-Y', strtotime($clase->date_init)) }} </td>
+                        <td class="text-center"> {{ date('d-m-Y', strtotime($clase->date_end)) }} </td>
                         <td class="text-center"> 
                             @foreach ($dias as $dia)
                                 @if ($clase->id === $dia->id)
@@ -53,7 +53,10 @@
                                 @endif
                              @endforeach
                         </td>
-                        <td class="text-center"> {{ $clase->hour_init }} - {{ $clase->hour_end }}</td>
+                        <td class="text-center"> 
+                            {{ date('H:i', strtotime($clase->hour_init)) }} - 
+                            {{ date('H:i', strtotime($clase->hour_end)) }}
+                        </td>
                         <td class="text-center"> 
                             @if ($clase->id_teacher === 0)
                                     <a href="#" class="addTeacher" id="{{ $clase->id }}" title="Maestro">Asignar Maestro</a>

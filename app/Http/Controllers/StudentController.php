@@ -6,18 +6,41 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Student;
+use App\Classe;
+use App\CourseModel;
+use App\Level;
+use Validator;
+use Session;
+use Storage;
 use DB;
 
 class StudentController extends Controller{
+
+    public function __construct() {
+        $this->middleware('auth');
+    }
 
     public function index(){
         return view('students.index');
     }
 
     public function create(){
-        return view('students.newstudent');
+        $courses  = CourseModel::all();
+        
+        return view('students.newstudent', ['cursos' => $courses]);
     }
 
+    public function getLevelsByCourse($course){
+        $levels   = DB::table('levels')
+                            ->join('classes', 'classes.id_level', '=', 'levels.id')
+                            ->where('classes.id_course', '=', $course)
+                            ->select('levels.id', 'levels.level')
+                            ->get();
+
+        $data = json_encode($levels);
+
+        return $data;
+    }
 
 
     public function storeTutor(Request $request) {
@@ -67,30 +90,17 @@ class StudentController extends Controller{
                                                     'country' => 'México'
                                                 ]);
             if ($addAddres) {
-                return 1;
+                echo 1;
             } else {
-                return 0;
+                echo 0;
             }
         } else {
             return redirect('500');
         }   
     }
 
-    public function getAddress() {
-        $tutor = DB::table('tutors')->max('id');
-        $getAddress = DB::table('address')
-                                ->select('street','number', 'between', 'colony')
-                                ->where('user_id', '=', $tutor)
-                                ->get();
-        $data = json_encode($getAddress);
-        return $data;
-    }
-
     public function storeStudent(Request $request) {
         $Tutor = DB::table('tutors')->max('id');
-
-        $data = $request;
-
         $this->validate($request, [
             'name'         => 'required',
             'surname'      => 'required',
@@ -99,13 +109,79 @@ class StudentController extends Controller{
             'genre'        => 'required',
             'civilstatus'  => 'required',
             'cellphone'    => 'required',
-            'street'       => 'required',
-            'number'       => 'required',
-            'between'      => 'required',
-            'colony'       => 'required',
+            'streetst'     => 'required',
+            'numberst'     => 'required',
+            'betweenst'    => 'required',
+            'colonyst'     => 'required',
             'reference'    => 'required',
             'anotations'   => 'required',
         ]);
+
+        $data = $request;
+
+
+        //Processing Picture
+        $avatar = $request->file('photo');
+        $input = array('image' => $avatar);
+        $rules = array('image' => 'required|image|mimes:jpeg,jpg,bmp,png,gif|max:6000');
+        $validate = Validator::make($input, $rules);
+        //Processing the image file
+        $filename = $avatar->getClientOriginalName();
+        $mime     = $avatar->getClientOriginalExtension();
+        $newname  = $data['name']."&".$data['surname'].".".$mime;
+
+        \Storage::disk('avatars')->put($newname, \File::get($avatar));
+
+        //Calculate Age
+        list($anio,$mes,$dia) = explode("-", $data['birthdate']);
+        $year_dif = date("Y") - $anio;
+        $month_dif = date("m") - $mes;
+        $day_dif  = date("d") - $dia;
+
+        if (($day_dif < 0 && $month_dif == 0) || ($month_dif < 0)){
+            $year_dif--;
+        } 
+    
+
+        $addStudent = DB::table('students')
+                            ->insert([
+                                      'tutor_id' => $Tutor,
+                                      'name'     => $data['name'],
+                                      'surname'  => $data['surname'],
+                                      'lastname' => $data['lastname'],
+                                      'bithdate' => $data['bithdate'],
+                                      'age'      => $year_dif,
+                                      'genre'    => $data['genre'],
+                                      'civil_status' => $data['civilstatus'],
+                                      'cellphone' => $data['cellphone'],
+                                      'sickness'  => $data['seckness'],
+                                      'medication' => $data['medication'],
+                                      'homestay'   => $data['homestay'],
+                                      'comments'   => $data['anotations'],
+                                      'status'     => 1,
+                                      'avatar'     => $newname]);
+
+        if ($addStudent) {
+            echo 1;
+        } else {
+            echo 0;
+        }
+    }
+
+    public function getAddress() {
+        $tutor = DB::table('tutors')->max('id');
+        $getAddress = DB::table('address')
+                                ->select('street','number', 'between', 'colony')
+                                ->where('user_id', '=', $tutor)
+                                ->get();
+        
+        if ($getAddress) {
+            $data = json_encode($getAddress);
+            return $data;
+        } else {
+            return 0;
+        }
+        
     }
 
     public function show($id){

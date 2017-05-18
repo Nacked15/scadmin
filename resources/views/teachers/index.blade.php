@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Clases')
+@section('title', 'Maestros')
 @section('content')
 	<!-- Content Header (Page header) -->
 <section class="content-header">
@@ -42,7 +42,9 @@
                 @foreach ($maestros as $maestro)
                     <tr>
                         <td class="text-center">{{ $maestro->id }}</td>
-                        <td class="text-center" dat-title="Foto">{{ $maestro->photo }}</td>
+                        <td class="text-center" dat-title="Foto">
+                            <img src="{{ asset('avatars/'.$maestro->avatar) }}" height="45" width="45" class="img-circle" alt="User Image">
+                        </td>
                         <td class="text-center" dat-title="Nombre">{{ strtoupper($maestro->name ) }}</td>
                         <td class="text-center" dat-title="Apellido">{{ strtoupper($maestro->surname ) }}</td>
                         <td class="text-center" dat-title="Email">{{ $maestro->email }} </td>
@@ -77,7 +79,7 @@
 <div class="modal fade example-modal-new" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
         <div class="modal-content">
-            <form action="{{ url('newTeacher') }}" method="POST">
+            <form action="{{ url('newTeacher') }}" method="POST" enctype="multipart/form-data">
                 <div class="modal-header modal-new">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="fa fa-times"></span></button>
                     <h4 class="modal-title text-center primary-text">Nuev@ Maestr@</h4>
@@ -93,12 +95,15 @@
                         <input type="text" class="form-control datepicker" id="surname" name="surname" placeholder="Apellido">
                     </div>
                     <div class="form-group">
-                        <label for="email">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="correo@mail.com">
-                    </div>
-                    <div class="form-group">
                         <label for="phone">Teléfono:</label>
                         <input type="text" class="form-control" id="phone" name="phone" placeholder="983 000 11 22">
+                    </div>
+                    <div class="form-group has-feedback">
+                        <input type="file" name="avatar" id="avatar">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="correo@mail.com">
                     </div>
                     <div class="form-group">
                         <label for="password">Contraseña:</label>
@@ -124,22 +129,44 @@
                 </div>
                 <div class="modal-body">
                     {{ csrf_field() }}
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4 col-lg-offset-4 col-md-offset-4 text-center">
+                            <?php $photo= ''; ?>
+                            <input type="hidden" name="teach_pic" id="id_pic" >
+                            <input type="hidden" id="path" value="{{ asset('avatars/') }}">
+                            <img alt="teacher_picture" id="teacher_picture" class="img-circle" height="60px" width="60px">
+                            <br>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
                     <div class="form-group">
-                        <label for="editname">Nombre:</label>
-                        <input type="hidden" name="teacher" id="teacher">
-                        <input type="text" class="form-control" id="editname" name="editname">
+                        <label for="editname" class="col-lg-2 col-md control-label">Nombre:</label>
+                        <div class="col-lg-10 col-md-8">
+                            <input type="hidden" name="teacher" id="teacher">
+                            <input type="text" class="form-control" id="editname" name="editname">
+                            <br>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="editsurname">Apellido(s):</label>
-                        <input type="text" class="form-control" id="editsurname" name="editsurname">
+                        <label for="editsurname" class="col-lg-2 col-md control-label">Apellido(s):</label>
+                        <div class="col-lg-10 col-md-8">
+                            <input type="text" class="form-control" id="editsurname" name="editsurname">
+                            <br>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="editemail">Email:</label>
-                        <input type="email" class="form-control" id="editemail" name="editemail">
+                        <label for="editemail" class="col-lg-2 col-md control-label">Email:</label>
+                        <div class="col-lg-10 col-md-8">
+                            <input type="email" class="form-control" id="editemail" name="editemail">
+                            <br>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label for="editphone">Teléfono:</label>
-                        <input type="text" class="form-control" id="editphone" name="editphone">
+                        <label for="editphone" class="col-lg-2 col-md control-label">Teléfono:</label>
+                        <div class="col-lg-10 col-md-8">
+                            <input type="text" class="form-control" id="editphone" name="editphone">
+                            <br>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">

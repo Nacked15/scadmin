@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use DB;
 use Validator;
+use Session;
+use Storage;
 use App\User;
 
 class TeacherController extends Controller
@@ -20,15 +23,22 @@ class TeacherController extends Controller
     }
 
     public function create(Request $request){
+        $avatar = $request->file('avatar');
+        $input = array('image' => $avatar);
+        $rules = array('image' => 'image|mimes:jpeg,jpg,bmp,png,gif|max:7000');
         $this->validate($request, [
             'name'      => 'required',
             'surname'   => 'required',
             'email'     => 'required|email|max:100|unique:users',
-            'phone'  =>  'required|min:6',
+            'phone'     =>  'required|min:6',
             'password'  =>  'required|min:6'
         ]);
 
         $data = $request;
+        $filename = $avatar->getClientOriginalName();
+        $mime     = $avatar->getClientOriginalExtension();
+        $newname  = "teacher_".$data['name'].".".$mime;
+        \Storage::disk('avatars')->put($newname, \File::get($avatar));
 
         $user = new User;
         $user->name = strtolower($data['name']);
@@ -36,6 +46,7 @@ class TeacherController extends Controller
         $user->category = 3;
         $user->email = strtolower($data['email']);
         $user->phone = $data['phone'];
+        $user->avatar = $newname;
         $user->password = bcrypt($data['password']);
 
         if ($user->save()) {
@@ -47,7 +58,7 @@ class TeacherController extends Controller
 
     public function edit($teacher){ 
         $getTeacher = DB::table('users')
-        						->select('id','photo', 'name', 'surname','email','phone','password')
+        						->select('id','avatar', 'name', 'surname','email','phone','password')
         						->where('id', '=', $teacher)
         						->get();
         $data = json_encode($getTeacher);

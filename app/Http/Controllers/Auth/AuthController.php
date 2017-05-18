@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
-use Storage;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
+use App\User;
 use Session;
+use Validator;
+use Storage;
 
 class AuthController extends Controller
 {
@@ -84,18 +84,18 @@ class AuthController extends Controller
         $this->validate($request, [
             'name'      => 'required',
             'surname'   => 'required',
-            'category'   => 'required',
+            'category'  => 'required',
             'email'     => 'required|email|max:100|unique:users',
             'password'  =>  'required|min:6'
         ]);
 
         if (!$validate->fails()) {
             $data = $request;
-            $randon = rand(10, 8000);
+            $randon = rand(10, 9999);
             //Processing the image file
             $filename = $avatar->getClientOriginalName();
             $mime     = $avatar->getClientOriginalExtension();
-            $newname  = $data['name']."-".$randon.".".$mime;
+            $newname  = $data['name']."&".$randon.".".$mime;
 
             \Storage::disk('avatars')->put($newname, \File::get($avatar));
 

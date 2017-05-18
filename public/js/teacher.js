@@ -1,3 +1,4 @@
+
 var Teachers = {
 	initialize: function() {
 		console.log('Teachers Initialize');
@@ -15,11 +16,14 @@ var Teachers = {
 				type: 'GET',
 				success: function(a){
 					var res = JSON.parse(a);
-					$('#teacher').val(id);
-					$('#editname').val(res[0].name);
+					var path = $('#path').val();
+					$('#teacher_picture').attr('src', path+'/'+res[0].avatar);
+					$('#teacher').    val(id);
+					$('#id_pic').     val(res[0].avatar);
+					$('#editname').   val(res[0].name);
 					$('#editsurname').val(res[0].surname);
-					$('#editemail').val(res[0].email);
-					$('#editphone').val(res[0].phone);
+					$('#editemail').  val(res[0].email);
+					$('#editphone').  val(res[0].phone);
 			    }
 			});//->End Ajax
 		});

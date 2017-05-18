@@ -72,6 +72,7 @@ Route::get('deleteClasse', 'ClasseController@destroy');
 //Students Modul
 Route::get('students', 'StudentController@index');
 Route::get('frmStudent', 'StudentController@create');
+Route::get('getLevels/{course}', 'StudentController@getLevelsByCourse');
 Route::post('newTutor', 'StudentController@storeTutor');
 Route::get('getAddress', 'StudentController@getAddress');
 Route::post('newStudent', 'StudentController@storeStudent');

@@ -18,7 +18,7 @@
 
    <div class="clearfix no-border">
         <a href="{{ url('frmStudent') }}" class="btn btn-info" id="newStudent">
-            <i class="fa fa-plus"></i> Nueva Alumno
+            <i class="fa fa-plus"></i> Nuevo Alumno
         </a>
       </div>
 	<div class="box">

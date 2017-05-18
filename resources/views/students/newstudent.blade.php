@@ -31,19 +31,19 @@
                 </div>
                 <div id="frmAddStudent" class="box-body">
                     <div class="nav-tabs-custom">
-                        <ul class="nav nav-tabs">
-                            <li class="active tutortab">
-                                <a href="#tutor" data-toggle="tab">Tutor</a>
+                        <ul class="nav nav-tabs" id="register">
+                            <li class="active" id="tab-1">
+                                <a href="#content-1" data-toggle="tab">Tutor</a>
                             </li>
-                            <li id="studenttab">
-                                <a href="#student" id='' data-toggle="tab">Alumno</a>
+                            <li id="tab-2">
+                                <a href="#content-2" data-toggle="tab">Alumno</a>
                             </li>
-                            <li id="infotab">
-                                <a href="#education" data-toggle="tab">Educación</a>
+                            <li id="tab-3">
+                                <a href="#content-3" data-toggle="tab">Educación</a>
                             </li>
                         </ul>
                         <div class="tab-content">
-                            <div class="active tab-pane tutortab" id="tutor">
+                            <div class="active tab-pane" id="content-1" style="height: 400px;">
                                 <form action="#" id="newTutor" action="POST" accept-charset="utf-8"> 
                                     {{ csrf_field() }}
                                     <p><small>Información General:</small></p>
@@ -118,14 +118,15 @@
                                     </div>
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
-                                        <button type="button" class="btn btn-primary" id="saveTutor">Guardar</button>
-                                    </div> <br><br>
+                                        <button type="button" class="btn btn-primary next" data-tab="1">Siguiente</button>
+                                    </div>
                                 </form>
                             </div>
-                            <div class="tab-pane tutortab" id="student">
-                                <form action="#" id="newStudent" method="POST" accept-charset="utf-8">
+
+                            <div class="tab-pane" id="content-2" style="height: 760px;">
+                                <form action="#" id="newStudent" method="POST" accept-charset="utf-8" enctype="multipart/form-data">
                                     {{ csrf_field() }}
-                                    <p><small>Información General:</small></p>
+                                    <p><small>Datos Personales del Alumno:</small></p>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="surname">Apellido Paterno:</label>
                                         <input type="text" class="form-control" id="surname" name="surname" placeholder="Primer Apellido" required>
@@ -140,7 +141,7 @@
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="relationship">Fecha de Nacimiento:</label>
-                                         <input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="Ocupación" required>
+                                         <input type="text" class="form-control" id="birthdate" name="birthdate" placeholder="2017-01-01" required>
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="job">Sexo:</label>
@@ -164,42 +165,49 @@
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="phone">Foto:</label>
-                                        <input type="text" class="form-control" id="photo" name="photo" placeholder="Choose a picture">
+                                        <input type="file" class="form-control" id="photo" name="photo" placeholder="Choose a picture">
                                     </div>
                                     <div class="clearfix"></div>
                                     <div><small>Dierección:</small></div>
                                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                         <label for="street">Calle:</label>
-                                        <input type="text" class="form-control" id="streetst" name="street" placeholder="Calle">
+                                        <input type="text" class="form-control" id="streetst" name="streetst" placeholder="Calle">
                                     </div>
                                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                         <label for="number">Numero:</label>
-                                        <input type="text" class="form-control" id="numberst" name="number" placeholder="Número">
+                                        <input type="text" class="form-control" id="numberst" name="numberst" placeholder="Número">
                                     </div>
                                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                         <label for="between">Entre:</label>
-                                        <input type="text" class="form-control" id="betweenst" name="between" placeholder="Crusamiento">
+                                        <input type="text" class="form-control" id="betweenst" name="betweenst" placeholder="Crusamiento">
                                     </div>
                                     <div class="form-group col-lg-3 col-md-6 col-sm-12">
                                         <label for="colony">Colonia:</label>
-                                        <input type="text" class="form-control" id="colonyst" name="colony" placeholder="Colonia">
+                                        <input type="text" class="form-control" id="colonyst" name="colonyst" placeholder="Colonia">
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="phoneAlt">Referencia Domiciliar:</label>
-                                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Teléfono de familiar">
+                                        <input type="text" class="form-control" id="reference" name="reference" placeholder="Alguna referencia de su hogar">
                                     </div>
                                     <div class="clearfix"></div>
+                                    <p><small>Información General:</small></p>
                                     <div class="form-group col-lg-6 col-md-6 col-sm-12">
                                         <label>¿Padece alguna enfermedad?:</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label>No
-                                            <input type="radio" id='yes' name="issickness" class="flat-red" value="No" checked>
+                                            <input type="radio"  
+                                                   name="issickness" 
+                                                   class="issick" 
+                                                   value="No" checked>
                                         </label>&nbsp;&nbsp;&nbsp;
                                         <label>Si
-                                            <input type="radio" id='not' name="issickness" class="flat-red" value="Si">
+                                            <input type="radio" 
+                                                   name="issickness" 
+                                                   class="issick"  
+                                                   value="Si">
                                         </label>
                                         <div id="sikness">
                                             <div class="col-lg-12">
-                                                <label for="phoneAlt">Especifique Cual:</label>
+                                                <label for="phoneAlt">Especifique Cuál:</label>
                                                 <input type="text" class="form-control" id="seckness" name="seckness" placeholder="Nombre del padecimiento"> 
                                             </div>
                                             <div class="col-lg-12">
@@ -224,15 +232,16 @@
                                     </div>
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
-                                        <button type="button" class="btn btn-primary" id="saveStudent">Guardar</button>
+                                        <button type="button" class="btn before space-right" data-tab="2">Anterior</button>
+                                        <button type="button" class="btn btn-primary next space-left" data-tab="2">Siguiente</button>
                                     </div>
                                 </form>
                             </div>
 
-                            <div class="tab-pane" id="education">
+                            <div class="tab-pane" id="content-3" style="height: 540px;">
                                 <form action="#" id="newInfo" accept-charset="utf-8">
                                     {{ csrf_field() }}
-                                    <p><small>Información General:</small></p>
+                                    <p><small>Educación / Ocupación:</small></p>
                                     <div class="form-group col-lg-4 col-md-6 col-sm-12">
                                         <label for="surname">Ocupación:</label>
                                         <select class="form-control" name="ocupation" required>
@@ -273,36 +282,34 @@
                                     <div class="form-group col-lg-8 col-md-6 col-sm-12" style="padding-top: 30px">
                                         <label for="isprevcourse">¿Ha tomado algún curso de ingles anteriormente?:</label>&nbsp;&nbsp;&nbsp;&nbsp;
                                         <label>No
-                                            <input type="radio" name="isprevcourse" class="flat-red" checked>
+                                            <input type="radio" name="isprevcourse" class="isprevcourse" value="No" checked>
+                                            {{-- <input type="radio" name="prevcourse" class="flat-red" checked> --}}
                                         </label>&nbsp;&nbsp;&nbsp;
                                         <label>Si
-                                            <input type="radio" name="isprevcourse" class="flat-red">
+                                            <input type="radio" name="isprevcourse" class="isprevcourse" value="Si">
+                                            {{-- <input type="radio" name="prevcourse" class="flat-red" checked> --}}
                                         </label>
                                     </div>
                                     <div class="clearfix"></div>
-                                    <div class="form-group col-lg-12 col-md-6 col-sm-12">
+                                    <div class="form-group col-lg-12 col-md-6 col-sm-12" id="prevcourse">
                                         <label for="phoneAlt">Describa:</label>
-                                        <input type="text" class="form-control" id="seckness" name="seckness" placeholder="Nombre del padecimiento"> 
+                                        <input type="text" class="form-control" id="seckness" name="seckness" placeholder="Descripción"> 
                                     </div>
                                     <p><small>Curso a Tomar:</small></p>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="course">Curso:</label>
                                         <select class="form-control" name="course" id="course">
                                             <option value="">Seleccione..</option>
-                                            <option value="">Englis Club</option>
-                                            <option value="">Primary</option>
-                                            <option value="">Adolescent</option>
-                                            <option value="">Adults</option>
+                                            @if ($cursos)
+                                                @foreach ($cursos as $curso)
+                                                    <option value="{{ $curso->id }}">{{ $curso->name }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
                                         <label for="level">Nivel:</label>
                                         <select class="form-control" name="level" id="level">
-                                            <option value="">Seleccione..</option>
-                                            <option value="">Englis Club</option>
-                                            <option value="">Primary</option>
-                                            <option value="">Adolescent</option>
-                                            <option value="">Adults</option>
                                         </select>
                                     </div>
                                     <div class="form-group col-lg-4 col-md-4 col-sm-12">
@@ -333,7 +340,8 @@
                                     <div class="clearfix"></div>
 
                                     <div class="form-group col-lg-12 col-md-12 col-sm-12 text-center">
-                                        <button type="button" class="btn btn-primary" id="saveStudent">Guardar</button>
+                                        <button type="button" class="btn before space-right" data-tab="3">Anterior</button>
+                                        <button type="button" class="btn btn-primary next space-left" data-tab="3" id="saveAllData">Guardar</button>
                                     </div>
                                     <br>
                                     <br>
@@ -422,8 +430,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
-                    <button type="submit" class="btn btn-primary" id="btnDeleteTask">Eliminar</button>
+                    <button type="button" class="frm btn btn-default pull-left" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="frm btn btn-primary" id="btnDeleteTask">Eliminar</button>
                 </div>
             </form>
         </div>
