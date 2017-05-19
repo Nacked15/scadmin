@@ -43,7 +43,8 @@ class AuthController extends Controller
     public function __construct(Guard $auth)
     {
         $this->auth = $auth;
-        $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
+        $this->middleware($this->guestMiddleware(), ['except' => 'getLogout']);
+        // $this->middleware('guest', ['except' => ['logout', 'getLogout']]);
     }
 
     /**
@@ -120,10 +121,9 @@ class AuthController extends Controller
 
     public function getLogout(){
         $this->auth->logout();
-
+        // Auth::Logout();
         Session::flush();
-
-        return view('forms.login');
+        return redirect('/');
     }
 
 }
