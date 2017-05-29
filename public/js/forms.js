@@ -21,6 +21,13 @@
 // 		}
 // 	});
 // }(jQuery));
+// 
+// 
+
+
+var pathArray = window.location.pathname.split('');
+
+var oneLevelLocation = pathArray[0];
 
 
 
